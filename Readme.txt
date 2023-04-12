@@ -12,6 +12,9 @@ Steps to run this API:
     API_KEY --- obtained from openweathermap. free plan.
 
 Endpoints:- (Note you would not be able to access any route if you are not authanticated)
+Note: to run this in postman you would have to first run /auth/google in web-browser where you can login via googleaccount and obtain the session cookie store in local storage.
+then add that cookie in he postman header.
+
 1. authentication:   /auth/google
 
 2. For getting current weater Data: 
@@ -203,3 +206,7 @@ Endpoints:- (Note you would not be able to access any route if you are not autha
         }
     ]
 
+************** Testing *************************
+
+In order to run the tests you have to comment the middleware function in app.js
+which check authentication of user because authentication is done by google server.
