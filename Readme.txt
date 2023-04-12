@@ -14,12 +14,14 @@ Steps to run this API:
 Endpoints:- (Note you would not be able to access any route if you are not authanticated)
 1. authentication:   /auth/google
 
-2. For getting current weater data: 
+2. For getting current weater Data: 
         
         By city name                /api/v1/currentWeatherData?location=Ludhiana
         By ZipCode                  /api/v1/currentWeatherData?location=141007&units=metric
         By coordinates              /api/v1/currentWeatherData?lat=10.25&lon=10.99&units=metric
-
+        
+        Optional inputs: units : metric - imperial  
+        
         response:  
         {
                 "coord": {
@@ -66,77 +68,138 @@ Endpoints:- (Note you would not be able to access any route if you are not autha
                 "cod": 200
             }
 
-3. For forcast: 
+3. For forecast: 
 
         By city name                /api/v1/forcast?ocation=Ludhiana&cnt=10
         By ZipCode                  /api/v1/forcastlLocation=141007&units=metric&cnt=10
         By coordinates              /api/v1/forcast?lat=10.25&lon=10.99&units=metric&cnt=8
 
+        Optional inputs: units : metric - imperial 
+                         cnt : (number) 1 < n <40 number of days forecast 
+
         Response:
-{
-    "cod": "200",
-    "message": 0,
-    "cnt": 40,
-    "list": [
         {
-            "dt": 1681279200,
-            "main": {
-                "temp": 36.16,
-                "feels_like": 35.69,
-                "temp_min": 35.42,
-                "temp_max": 36.16,
-                "pressure": 984,
-                "sea_level": 984,
-                "grnd_level": 984,
-                "humidity": 27,
-                "temp_kf": 0.74
-            },
-            "weather": [
+            "cod": "200",
+            "message": 0,
+            "cnt": 40,
+            "list": [
                 {
-                    "id": 802,
-                    "main": "Clouds",
-                    "description": "scattered clouds",
-                    "icon": "03d"
-                }
+                    "dt": 1681279200,
+                    "main": {
+                        "temp": 36.16,
+                        "feels_like": 35.69,
+                        "temp_min": 35.42,
+                        "temp_max": 36.16,
+                        "pressure": 984,
+                        "sea_level": 984,
+                        "grnd_level": 984,
+                        "humidity": 27,
+                        "temp_kf": 0.74
+                    },
+                    "weather": [
+                        {
+                            "id": 802,
+                            "main": "Clouds",
+                            "description": "scattered clouds",
+                            "icon": "03d"
+                        }
+                    ],
+                    "clouds": {
+                        "all": 37
+                    },
+                    "wind": {
+                        "speed": 3.75,
+                        "deg": 311,
+                        "gust": 4.55
+                    },
+                    "visibility": 10000,
+                    "pop": 0,
+                    "sys": {
+                        "pod": "d"
+                    },
+                    "dt_txt": "2023-04-12 06:00:00"
+                },
+                .....
+                .....
             ],
-            "clouds": {
-                "all": 37
-            },
-            "wind": {
-                "speed": 3.75,
-                "deg": 311,
-                "gust": 4.55
-            },
-            "visibility": 10000,
-            "pop": 0,
-            "sys": {
-                "pod": "d"
-            },
-            "dt_txt": "2023-04-12 06:00:00"
-        },
-        .....
-        .....
-    ],
-    "city": {
-        "id": 1264728,
-        "name": "Ludhiana",
-        "coord": {
-            "lat": 30.9,
-            "lon": 75.85
-        },
-        "country": "IN",
-        "population": 15000,
-        "timezone": 19800,
-        "sunrise": 1681259573,
-        "sunset": 1681305706
-    }
-}
+            "city": {
+                "id": 1264728,
+                "name": "Ludhiana",
+                "coord": {
+                    "lat": 30.9,
+                    "lon": 75.85
+                },
+                "country": "IN",
+                "population": 15000,
+                "timezone": 19800,
+                "sunrise": 1681259573,
+                "sunset": 1681305706
+            }
+        }
 
 4. Endpoint for geocoding reverse (cordinates to city)
 
     /api/v1/geo/reverse?lat=30.90&lon=75.851
 
+    Response:
+    [
+        {
+            "name": "Ludhiana",
+            "local_names": {
+                "en": "Ludhiana",
+                "pa": "ਲੁਧਿਆਣਾ",
+                "ko": "루디아나",
+                "ta": "லூதியானா",
+                "he": "לודיאנה",
+                "ur": "لدھیانہ",
+                "hi": "लुधियाना",
+                "kn": "ಲುಧಿಅನಾ",
+                "es": "Ludhiana",
+                "de": "Ludhiana",
+                "zh": "卢迪亚纳",
+                "fr": "Ludhiana",
+                "te": "లూధియానా",
+                "ja": "ルディヤーナー",
+                "ml": "ലുധിയാന",
+                "ru": "Лудхияна"
+            },
+            "lat": 30.9090157,
+            "lon": 75.851601,
+            "country": "IN",
+            "state": "Punjab"
+        }
+    ]
+
 5. Endpoint for geocoding (city to cordinates)
     
     /api/v1/geo/city?location=Ludhiana
+
+    Response:
+    [
+        {
+            "name": "Ludhiana",
+            "local_names": {
+                "ko": "루디아나",
+                "ur": "لدھیانہ",
+                "he": "לודיאנה",
+                "zh": "卢迪亚纳",
+                "kn": "ಲುಧಿಅನಾ",
+                "de": "Ludhiana",
+                "hi": "लुधियाना",
+                "ru": "Лудхияна",
+                "pa": "ਲੁਧਿਆਣਾ",
+                "ml": "ലുധിയാന",
+                "fr": "Ludhiana",
+                "te": "లూధియానా",
+                "en": "Ludhiana",
+                "ja": "ルディヤーナー",
+                "es": "Ludhiana",
+                "ta": "லூதியானா"
+            },
+            "lat": 30.9090157,
+            "lon": 75.851601,
+            "country": "IN",
+            "state": "Punjab"
+        }
+    ]
 

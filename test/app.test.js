@@ -2,7 +2,7 @@ const request = require("supertest");
 require("dotenv").config();
 const app = require("../app");
 
-// Please Note that for faking a login in am comment the middleware that checks log in.
+// Please Note that for faking a login in comment the middleware that checks user login in app.js .
 
 describe("GET /auth/google", () => {
 	it("should redirect to Google authentication page", async () => {
